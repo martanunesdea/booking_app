@@ -4,31 +4,65 @@
 
 import sqlite3
 
+class DBHandler:
+##
+##    object variables:
+##      connection handler
+##      cursor
+##    method variables:
+##      table_name ??     
+##
+
+    def __init__(self):
+        self._conn = sqlite3.connect('example.db')
+        self._cursor = self._conn.cursor()
+
+    def create_table(self, table_name, **kwargs):
+        self._cursor.execute('''CREATE TABLE ? ''', table_name)
+        print("Caught error")
+
+    def add_row(self, table_name, *kargs):     
+        self._cursor.execute('INSERT INTO ? VALUE ?', table_name, kargs)
+    
+    
+    # def update_table(self, **kwargs):
+        
+
+    # def get_count(self, **kwargs):
+        # outputs total count of rows in table
+
+    def print_table(self, table_name, *kargs):
+        for row in self._cursor.execute('SELECT * FROM ?', table_name):
+            print(row)
+
+
 def main():
-    my_conn = connect()
+    if test(): print("Status: OK")
+    else: print("Status: NOK")
+
+
+
+def test():
+    ## methods to create and test
+    my_db = DBHandler()
+    if my_db: return True
     
-    ##
-    ## test that my_conn is operational
-    ##
-
-    c = my_conn.cursor()
+    # TODO: add unit test
+    my_db.create_table("users")
     
-    # Create table
-    c.execute('''CREATE TABLE stocks
-                (date text, trans text, symbol text, qty real, price real)''')
+    # TODO: add unit test
+    my_db.add_row("users", ["user1", "buy"])
+    
+    # TODO: add unit test
+    my_db.print_table("users")
 
-    # Insert a row of data
-    c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+    # my_db.update_row(table_string, range params)
+    # my_db.show_table(string table)
+    # my_db.show_rows(string table, range rows)
+    # my_db.delete()
+    
+        
 
-    # Save (commit) the changes
-    my_conn.commit()
 
-    # We can also close the connection if we are done with it.
-    # Just be sure any changes have been committed or they will be lost.
-    conn.close() 
-
-def connect():
-    conn = sqlite3.connect('example.db')
-    return conn
 
 if __name__ == "__main__": main()

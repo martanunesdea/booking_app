@@ -1,13 +1,13 @@
 # File describing the class Password
 
 class Pwd:
-    def __init__(self, password_entry, account, date):
-        self._password = password_entry
-        self._account = account
+    def __init__(self, user, key, date):
+        self._user = user
+        self._key = key
         self._date = date
     
     def __str__(self):
-        return f'Account {self._account} had a password set in {self._date}'
+        return f'User {self._user} was created in {self._date}'
      
 
 def main():
@@ -18,8 +18,7 @@ def main():
 
 
 def test():
-    password = Pwd("pass12345", "amazon", "2020-10-02")
-    print("adding password...")
+    password = Pwd("marta", "hello123", "2020-10-02")
     print(password)
 
 
