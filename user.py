@@ -49,9 +49,9 @@ class Author(User):
         # get size of dictionary and then update it on list
         bookings_count = len(self._bookings_created)
         if self._bookings_created[0] == 'zero':
-            self._bookings_created = {0 : date}
+            self._bookings_created = {0 : date.strftime("%Y/%m/%d")}
         else:
-            self._bookings_created.update({bookings_count:date})
+            self._bookings_created.update({ bookings_count: date.strftime("%Y/%m/%d") })
 
         return slot
 

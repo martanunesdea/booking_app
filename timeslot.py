@@ -4,6 +4,7 @@
 #   - A state: "available" or "not available"
 #   - An author: admin name
 from user import * 
+from datetime import date
 
 class Timeslot:
     def __init__(self, date, author, state = None, attendees = None, max_capacity = None):
@@ -70,12 +71,13 @@ class Timeslot:
         self._attendees += 1
         ## check capacity is full
         if self._capacity == self._attendees:
-            self._state = "fully booked"            
+            self._state = "fully booked"
+
 
 def main():
     my_author = Author(first_name = "maria", last_name = "pm")
-    time1 = my_author.create_timeslot("10-09-2020", "available")
-    time2 = my_author.create_timeslot("12-12-2020", "available")
+    time1 = my_author.create_timeslot(date(2020, 10, 9), "available")
+    time2 = my_author.create_timeslot(date(2020, 10, 12), "available")
     time1.get_details()
     time2.get_details()
 
@@ -85,5 +87,6 @@ def main():
     print(time1)
     bookings_total = my_author.get_bookings_created()
     print(bookings_total)
+    
 
 if __name__ == "__main__": main()
