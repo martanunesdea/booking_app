@@ -24,36 +24,51 @@ class User:
 
 class Client(User):
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._type = "client"
-        self._first_name = kwargs['first_name'] if 'first_name' in kwargs else 'example'
-        self._last_name = kwargs['last_name'] if 'last_name' in kwargs else 'example'
+        self._bookings_booked = {0:'zero'}
+        self._bookings_count = 0
+       
+    def get_type(self):
+        return self._type
 
     def book_slot(self, slot):
         slot.add_booking()
-        self._bookings = slot.get_date()
-        # TODO: add method "add_to_bookings_list"
+        self._bookings_count += 1
+        if self._bookings_booked[0] == 'zero':
+            self._bookings_booked = {0 : slot}
+        else:
+            self._bookings_booked.update({ self._bookings_count: slot })
 
     def get_booked_slots(self):
-        print(f'User {self._first_name} has booking on {self._bookings} ')
-        return self._bookings
+        #print(f'User {self._first_name} has booking on {self._bookings} ')
+        return self._bookings_count
 
 class Author(User):
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._type = "author"
-        self._first_name = kwargs['first_name'] if 'first_name' in kwargs else 'example'
-        self._last_name = kwargs['last_name'] if 'last_name' in kwargs else 'example'
         self._bookings_created = { 0:'zero'}
+        self._bookings_count = 0
+
+    def get_type(self):
+        return self._type
+
+    def get_total_bookings(self):
+        return self._bookings_count
 
     def create_timeslot(self, date, state):
         slot = Timeslot(date, self, state)
+        self._bookings_count += 1
         # get size of dictionary and then update it on list
-        bookings_count = len(self._bookings_created)
         if self._bookings_created[0] == 'zero':
-            self._bookings_created = {0 : date.strftime("%Y/%m/%d")}
+            self._bookings_created = {0 : slot}
         else:
-            self._bookings_created.update({ bookings_count: date.strftime("%Y/%m/%d") })
-
+            self._bookings_created.update({ self._bookings_count: slot })
         return slot
+
+    # TODO: delete timeslot
+
 
     def get_bookings_created(self):
         return self._bookings_created

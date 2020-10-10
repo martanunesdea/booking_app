@@ -5,8 +5,12 @@
 #   - An author: admin name
 from user import * 
 from datetime import date
+import sqlite3
 
 class Timeslot:
+    # TODO: add class global variable that counts instances of timeslots
+    
+
     def __init__(self, date, author, state = None, attendees = None, max_capacity = None):
         if date:
             self._date = date
@@ -52,7 +56,10 @@ class Timeslot:
     def get_state(self):
         return self._state
 
-    def get_capcity(self):
+    def get_attendees(self):
+        return self._attendees
+
+    def get_capacity(self):
         return self._capacity
 
     ### Helper methods
@@ -63,7 +70,8 @@ class Timeslot:
                 State: {self._state}
                 Attendees: {self._attendees} 
                 Capacity: {self._capacity}'''
-    
+    ## TODO: add __repr__
+
     def get_details(self):
         print(f'Timeslot {self._date} created by {self._author} has {self._attendees} booking(s) and is {self._state}')
 
@@ -87,6 +95,18 @@ def main():
     print(time1)
     bookings_total = my_author.get_bookings_created()
     print(bookings_total)
+    
+    conn = sqlite3.connect('example.db')
+    c = conn.cursor()
+    #c.execute('CREATE TABLE cal2 (date text, author text, state text, attendees real, max_capacity real)')
+    #c.execute('CREATE TABLE cal3 (slot_date date, author text, state text, attendees integer, max_capacity integer)')
+    c.execute("INSERT INTO cal3 VALUES (?, ?, ?, ?, ?)", (time1.get_date(),str(time1.get_author()), time1.get_state(), time1.get_attendees(), time1.get_capacity()) )
+    conn.commit()
+    for row in c.execute('SELECT * FROM cal3'):
+        print(row)
+    conn.close()
+
+
     
 
 if __name__ == "__main__": main()
