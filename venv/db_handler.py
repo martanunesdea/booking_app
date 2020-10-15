@@ -49,6 +49,9 @@ class DBHandler:
         elif user.get_type() == "author":
             self._cursor.execute("INSERT INTO users VALUES (?, ?, ?)", (user.get_user_name(), user.get_type(), user.get_total_bookings()) )
         self._conn.commit()
+    
+    def terminate(self):
+        self._conn.close()
         
 
     # TODO: 
@@ -69,6 +72,17 @@ class DBHandler:
             users_list[index] = row
             index += 1
         return users_list
+
+    def get_timeslots(self):
+        """
+        returns all rows from timeslots schema
+        """
+        timeslots = dict()
+        index = 0
+        for row in self._cursor.execute('SELECT * from timeslots'):
+            timeslots[index] = row
+            index += 1
+        return timeslots
 
     def print_bookings(self):
         for row in self._cursor.execute('SELECT * FROM timeslots'):

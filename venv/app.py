@@ -7,9 +7,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    return render_template("home.html")
+
+@app.route('/bookings')
+def view_bookings():
     my_db = DBHandler()
-    users_list = my_db.get_users()
-    users_names = users_list.values()
-
-
-    return render_template("list.html",rows = users_list.values())
+    #users = my_db.get_users()
+    # #users_values = users.values()
+    timeslots = my_db.get_timeslots()
+    timeslots_values = timeslots.values()
+    return render_template("bookings_page.html", bookings = timeslots_values)
