@@ -20,12 +20,16 @@ def main():
     #my_db.bootloader() 
    
     #my_db.update(time1, my_author, my_user)
+    my_db.update(my_author)
     my_db.update(time2)
-    users_list = my_db.get_users() # print separately as these are different tables    
+    users_list = my_db.get_users() # print separately as these are different tables 
+    print(users_list[0][0])   
     timeslots = my_db.get_timeslots()
+    print(timeslots[0][0])
     my_db.print_bookings()
     my_db.remove_booking(time2)
-    my_db.print_bookings()
+    my_db.remove_user(my_author)
+    print(users_list[0][0])
     my_db.terminate()
 
 

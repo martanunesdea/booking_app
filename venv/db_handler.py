@@ -56,6 +56,8 @@ class DBHandler:
     def remove_booking(self, slot):
         self._cursor.execute("DELETE FROM timeslots WHERE state = ?", ('available',))
 
+    def remove_user(self, user):
+        self._cursor.execute("DELETE FROM users WHERE username = ?", (user.get_user_name(),))
     # TODO: 
     # def remove_bookings(self, slot):
     # def remove_user(self, user):
