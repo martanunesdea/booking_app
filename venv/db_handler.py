@@ -14,8 +14,7 @@ class DBHandler:
 ##    object variables:
 ##      connection handler
 ##      cursor
-##    method variables:
-##      table_name ??     
+##      
 ##
 
     def __init__(self):
@@ -54,6 +53,8 @@ class DBHandler:
     def terminate(self):
         self._conn.close()
         
+    def remove_booking(self, slot):
+        self._cursor.execute("DELETE FROM timeslots WHERE state = ?", ('available',))
 
     # TODO: 
     # def remove_bookings(self, slot):
@@ -65,6 +66,8 @@ class DBHandler:
                 self.update_bookings(arg)
             elif type(arg) == Client or type(arg) == Author:
                 self.update_user(arg)
+
+    
 
     def get_users(self):
         self._cursor.execute('SELECT * FROM users')

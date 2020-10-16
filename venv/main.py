@@ -11,7 +11,7 @@ def main():
     time1 = my_author.create_timeslot(date(2020, 10, 12), 'available')
     my_user = Client(first_name = 'marta', last_name = 'nunes')
     my_user.book_slot(time1)
-    time2 = my_author.create_timeslot(date(2020, 11, 24), 'available')
+    time2 = my_author.create_timeslot(date(2020, 12, 25), 'available')
 
     my_db = DBHandler()
     
@@ -23,12 +23,9 @@ def main():
     my_db.update(time2)
     users_list = my_db.get_users() # print separately as these are different tables    
     timeslots = my_db.get_timeslots()
-    print(timeslots)
-    tuple(timeslots)
-    print(len(timeslots))
-    for row in timeslots:
-        print(row[0])
-        print(row[1])
+    my_db.print_bookings()
+    my_db.remove_booking(time2)
+    my_db.print_bookings()
     my_db.terminate()
 
 
