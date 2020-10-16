@@ -20,6 +20,7 @@ class DBHandler:
 
     def __init__(self):
         self._conn = sqlite3.connect('example.db')
+        self._conn.row_factory = sqlite3.Row
         self._cursor = self._conn.cursor()
     
     ## Bootloader methods: Only called when program is created (one-use only)
@@ -66,24 +67,18 @@ class DBHandler:
                 self.update_user(arg)
 
     def get_users(self):
-        users_list = dict()
-        index = 0
-        for row in self._cursor.execute('SELECT * FROM users'):
-            users_list[index] = row
-            index += 1
-        return users_list
+        self._cursor.execute('SELECT * FROM users')
+        users = self._cursor.fetchall()
+        return users
 
     def get_timeslots(self):
         """
         returns all rows from timeslots schema
         """
-        timeslots = dict()
-        index = 0
-        for row in self._cursor.execute('SELECT * from timeslots'):
-            timeslots[index] = row
-            index += 1
+        self._cursor.execute("SELECT * from timeslots") 
+        timeslots = self._cursor.fetchall()
         return timeslots
 
     def print_bookings(self):
         for row in self._cursor.execute('SELECT * FROM timeslots'):
-            print(row)         
+            print(row)

@@ -17,13 +17,18 @@ def main():
     
     # On program startup, bootloader will create all tables necessary for execution
     # TODO: add ifdef-type conditional for bootloader mode 
-    my_db.bootloader() 
+    #my_db.bootloader() 
    
     #my_db.update(time1, my_author, my_user)
     my_db.update(time2)
     users_list = my_db.get_users() # print separately as these are different tables    
     timeslots = my_db.get_timeslots()
-    print(timeslots.values())
+    print(timeslots)
+    tuple(timeslots)
+    print(len(timeslots))
+    for row in timeslots:
+        print(row[0])
+        print(row[1])
     my_db.terminate()
 
 

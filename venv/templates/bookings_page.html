@@ -2,8 +2,15 @@
 <html>
    <body> 
     <h1>Bookings list</h1>
-    {% for row in bookings %}
-    <p>{{row}}</p><br>
-    {% endfor %}
+    <ul>
+        {% for row in rows %}
+        <li>Date: {{row[0]}}</li>
+        <li>Author: {{row[1]}}</li>
+        <li>State: {{row[2]}}</li>
+        <li>Attendess: {{row[3]}}</li>
+        <li>Max. capactiy: {{row[4]}}</li>
+        <br>
+        {% endfor %}
+    </ul>
     </body>
 </html>

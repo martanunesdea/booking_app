@@ -12,8 +12,12 @@ def index():
 @app.route('/bookings')
 def view_bookings():
     my_db = DBHandler()
-    #users = my_db.get_users()
-    # #users_values = users.values()
     timeslots = my_db.get_timeslots()
-    timeslots_values = timeslots.values()
-    return render_template("bookings_page.html", bookings = timeslots_values)
+    return render_template("bookings_page.html", rows = timeslots)
+
+@app.route('/users')
+def view_users():
+    my_db = DBHandler()
+    users = my_db.get_users()
+    return render_template("users_page.html", rows = users)
+
