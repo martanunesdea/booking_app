@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
 
 {% block intro %}
-    <h4>Welcome to the booking app</h4>
+    <h4>Delete a timeslot</h4>
 {% endblock %}
 
 {% block main %}
-<p>Here you can: </p>
-<ul>
-  <li><a href="{{ url_for('view_bookings') }}">See existing bookings</a></li>
-  <li><a href="{{ url_for('view_bookings') }}">See existing users</a></li>
-  <li><a href="{{ url_for('edit_booking') }}">Edit a booking</a></li>
-</ul>
+<form id="delete">
+    <label>timeslot <input name="timeslot"></label>
+    <label>author <input name="author"></label>
+    <input type="submit" value="Delete">
+</form>
+<span><span id="result"></span></span>
 {% endblock %}
-
 
 
 {% block script %}
@@ -34,5 +33,3 @@
     form.addEventListener('submit', addDelete);
   </script>
 {% endblock %}
-
-
