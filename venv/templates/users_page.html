@@ -1,6 +1,6 @@
-<!doctype html>
-<html>
-   <body> 
+{% extends 'base.html' %}
+
+{% block main %}
     <h1>Users list</h1>
     <ul>
         {% for row in rows %}
@@ -12,5 +12,4 @@
     </ul>
 
     <button name="deleteButton">Delete user</button>
-    </body>
-</html>
+{% endblock %}

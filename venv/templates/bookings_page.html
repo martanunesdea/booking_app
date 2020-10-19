@@ -1,6 +1,6 @@
-<!doctype html>
-<html>
-   <body> 
+{% extends 'base.html' %}
+
+{% block main %}
     <h1>Bookings list</h1>
     <ul>
         {% for row in rows %}
@@ -10,8 +10,30 @@
         <li>Attendess: {{row[3]}}</li>
         <li>Max. capactiy: {{row[4]}}</li>
         <br>
+        <form id="delete">
+            <input type="submit" value="Delete">
+        </form>
+        <span><span id="result"></span></span>
         {% endfor %}
     </ul>
+{% endblock %}
 
-    </body>
-</html>
+{% block script %}
+  <script>
+    function addDelete(ev) {
+      ev.preventDefault();
+      var request = new XMLHttpRequest();
+      request.addEventListener('load', addResponse);
+      request.open('POST', {{ url_for('edit_booking') }});
+      request.send(new FormData(this));
+    }
+
+    function addResponse() {
+      var span = document.getElementById('result');
+      span.innerText = "deleted";
+    }
+
+    var form = document.getElementById('delete');
+    form.addEventListener('submit', addDelete);
+  </script>
+{% endblock %}
