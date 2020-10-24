@@ -13,5 +13,14 @@ CREATE TABLE post (
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   title TEXT NOT NULL,
   body TEXT NOT NULL,
+  dateposted TIMESTAMP NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
+
+CREATE TABLE booking (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  dateBooking DATE,
+  author_id INTEGER NOT NULL,
+  capacity_limit INTEGER NOT NULL,
+  FOREIGN KEY (author_id) REFERENCES user (id) 
+)
