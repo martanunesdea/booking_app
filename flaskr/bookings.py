@@ -6,6 +6,9 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
+import pandas as pd
+import datetime
+
 bp = Blueprint('bookings', __name__, url_prefix='/bookings')
 
 @bp.route('/')
@@ -23,8 +26,7 @@ def index():
 def create():
     if request.method == 'POST':
         title = request.form['title']
-        date = request.form['date_booking']
-        date_booking = pd.to_datetime(date, format='%d-%m-%Y', errors='coerce')
+        date_booking = request.form['date_booking']
         error = None
 
         if not title:

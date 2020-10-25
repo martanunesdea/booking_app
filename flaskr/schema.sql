@@ -22,7 +22,7 @@ CREATE TABLE post (
 CREATE TABLE bookings (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT NOT NULL,
-  date_booking TIMESTAMP NOT NULL,
+  date_booking TEXT NOT NULL,
   author_id INTEGER NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id) 
 );
