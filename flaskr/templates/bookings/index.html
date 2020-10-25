@@ -10,16 +10,15 @@
 {% block content %}
   {% for post in posts %}
     <article class="post">
-      <header>
-        <div>
+      <div>
           <h1>{{ post['title'] }}</h1>
-          <p>{{ post['date_booking']}}</p>
-          <p>Created by {{ post['username'] }}</p>
-        </div>
-      </header>
+          <p>Date: {{ post['date_booking']}}</p>
+          <p>Organised by: {{ post['username'] }}</p>
+      </div>
       {% if g.user['id'] == post['author_id'] %}
       <a class="action" href="{{ url_for('bookings.update', id=post['id']) }}">Edit</a>
     {% endif %}
+    <a class="action" href="{{ url_for('bookings.view_full_details', id=post['id']) }}">More details</a>
     </article>
     {% if not loop.last %}
       <hr>

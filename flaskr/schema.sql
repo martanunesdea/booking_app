@@ -24,14 +24,15 @@ CREATE TABLE bookings (
   title TEXT NOT NULL,
   date_booking TEXT NOT NULL,
   author_id INTEGER NOT NULL,
+  attendees_count INTEGER NOT NULL,
+  max_capacity INTEGER NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id) 
 );
 
 CREATE TABLE attendees (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  attendee_id INTEGER NOT NULL,
+  username TEXT NOT NULL,
   booking_id INTEGER NOT NULL,
   date_booked TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (attendee_id) REFERENCES user (id)
   FOREIGN KEY (booking_id) REFERENCES booking (id)
 )

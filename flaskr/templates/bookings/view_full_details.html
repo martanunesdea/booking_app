@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Details for {{ post['title'] }}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <p>Title: {{post['title'] }} </p>
+  <p>Date: {{post['date_booking'] }} </p>
+  <p>Author: {{post['username'] }} </p>
+  <p>Attendees: {{post['attendees_count'] }} </p>
+  <p>Maximum capacity: {{post['max_capacity'] }}</p>
+   
+  <hr>
+  
+{% endblock %}

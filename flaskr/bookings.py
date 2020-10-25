@@ -16,7 +16,7 @@ bp = Blueprint('bookings', __name__, url_prefix='/bookings')
 def index():
     db = get_db()
     posts = db.execute(
-        'SELECT b.id, date_booking, author_id, username'
+        'SELECT b.id, date_booking, title, author_id, username'
         ' FROM bookings b JOIN user u ON b.author_id = u.id'
         ' ORDER BY b.id DESC'
     ).fetchall()
@@ -28,6 +28,8 @@ def create():
     if request.method == 'POST':
         title = request.form['title']
         date_booking = request.form['date_booking']
+        attendees_count = request.form['attendees_count']
+        max_capacity = request.form['max_capacity']
         error = None
 
         if not title:
@@ -38,9 +40,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO bookings (title, author_id, date_booking)'
-                ' VALUES (?, ?, ?)',
-                (title, g.user['id'], date_booking)
+                'INSERT INTO bookings (title, author_id, date_booking, attendees_count, max_capacity)'
+                ' VALUES (?, ?, ?, ?, ?)',
+                (title, g.user['id'], date_booking, attendees_count, max_capacity)
             )
             db.commit()
             return redirect(url_for('bookings.index'))
@@ -89,6 +91,28 @@ def update(id):
             return redirect(url_for('bookings.index'))
 
     return render_template('bookings/update.html', post=post)
+
+
+@bp.route('/<int:id>/view_full_details')
+@login_required
+def view_full_details(id):
+    post = get_db().execute(
+        'SELECT b.id, title, date_booking, author_id, username, attendees_count, max_capacity'
+        ' FROM bookings b JOIN user u ON b.author_id = u.id'
+        ' WHERE b.id = ?',
+        (id,)
+    ).fetchone()
+
+    if post is None:
+        abort(404, "Booking id {0} doesn't exist.".format(id))
+
+    #if check_author and post['author_id'] != g.user['id']:
+    #    abort(403)
+
+    
+    return render_template('bookings/view_full_details.html', post=post)
+
+
 
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
