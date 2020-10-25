@@ -4,6 +4,8 @@
 <nav>
   <h1>Marta Nunes de Abreu</h1>
   <ul>
+    <li><a href="{{ url_for('blog.index') }}">Blog</a></li>
+    <li><a href="{{ url_for('bookings.index') }}">Bookings</a></li>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
       <li><a href="{{ url_for('auth.logout') }}">Log Out</a>

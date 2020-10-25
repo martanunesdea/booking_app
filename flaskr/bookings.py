@@ -12,6 +12,7 @@ import datetime
 bp = Blueprint('bookings', __name__, url_prefix='/bookings')
 
 @bp.route('/')
+@login_required
 def index():
     db = get_db()
     posts = db.execute(
