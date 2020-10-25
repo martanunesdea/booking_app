@@ -1,5 +1,8 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS bookings;
+DROP TABLE IF EXISTS attendees;
+
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -13,14 +16,22 @@ CREATE TABLE post (
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   title TEXT NOT NULL,
   body TEXT NOT NULL,
-  dateposted TIMESTAMP NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
 
-CREATE TABLE booking (
+CREATE TABLE bookings (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  dateBooking DATE,
+  title TEXT NOT NULL,
+  date_booking TIMESTAMP NOT NULL,
   author_id INTEGER NOT NULL,
-  capacity_limit INTEGER NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id) 
+);
+
+CREATE TABLE attendees (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  attendee_id INTEGER NOT NULL,
+  booking_id INTEGER NOT NULL,
+  date_booked TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (attendee_id) REFERENCES user (id)
+  FOREIGN KEY (booking_id) REFERENCES booking (id)
 )
