@@ -6,8 +6,9 @@ DROP TABLE IF EXISTS attendees;
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  username TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL
+  username TEXT NOT NULL,
+  password TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL
 );
 
 CREATE TABLE post (
@@ -15,7 +16,7 @@ CREATE TABLE post (
   author_id INTEGER NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   title TEXT NOT NULL,
-  body TEXT NOT NULL,
+  description TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
 
@@ -26,6 +27,7 @@ CREATE TABLE bookings (
   author_id INTEGER NOT NULL,
   attendees_count INTEGER NOT NULL,
   max_capacity INTEGER NOT NULL,
+  description TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id) 
 );
 
@@ -33,6 +35,6 @@ CREATE TABLE attendees (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT NOT NULL,
   booking_id INTEGER NOT NULL,
-  date_booked TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  date_booked TEXT NOT NULL,
   FOREIGN KEY (booking_id) REFERENCES booking (id)
 )

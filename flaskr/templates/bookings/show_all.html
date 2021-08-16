@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Bookings{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  {% for booking in bookings %}
+    <article class="post">
+      <div>
+          <h1>{{ booking['title'] }}</h1>
+          <p>Date: {{ booking['date_booking']}}</p>
+          <p>Date booked: {{ booking['date_booked']}}</p>
+
+      </div>
+      <a class="action" href="{{ url_for('bookings.view_full_details', id=booking['id']) }}">More details</a>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

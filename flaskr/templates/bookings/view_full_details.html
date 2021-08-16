@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Details for {{ post['title'] }}{% endblock %}</h1>
+  <h1>{% block title %}Details for {{ advert['title'] }}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-  <p>Title: {{post['title'] }} </p>
-  <p>Date: {{post['date_booking'] }} </p>
-  <p>Author: {{post['username'] }} </p>
-  <p>Attendees: {{post['attendees_count'] }} </p>
-  <p>Maximum capacity: {{post['max_capacity'] }}</p>
-   
+  <p>Title: {{advert['title'] }} </p>
+  <p>Date: {{advert['date_booking'] }} </p>
+  <p>Author: {{advert['username'] }} </p>
+  <p>Attendees: {{advert['attendees_count'] }} </p>
+  <p>Maximum capacity: {{advert['max_capacity'] }}</p>
+  <p>Description: {{ advert['description'] }} </p>
   <hr>
-  
+  <form action="{{ url_for('bookings.add_to_cart', id=advert['id']) }}" method="post">
+    <input type="submit" value="Add To Cart" onclick="return confirm('Are you sure?');">
+  </form>
 {% endblock %}

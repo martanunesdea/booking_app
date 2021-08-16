@@ -14,6 +14,8 @@
     <input name="attendees_count" id="attendees_count" value="{{ request.form['attendees_count'] }}" required>
     <label for="max_capacity">Maximum capacity</label>
     <input name="max_capacity" id="max_capacity" value="{{ request.form['max_capacity'] }}" required>
+    <label for="description">Description</label>
+    <textarea name="description" id="description">"{{ request.form['body'] }}"</textarea>
     <input type="submit" value="Save">
   </form>
 {% endblock %}
