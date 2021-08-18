@@ -25,7 +25,7 @@ def index():
 def create():
     if request.method == 'POST':
         title = request.form['title']
-        date_booking = request.form['date_booking']
+        date_booking = request.form.get('date_booking')
         attendees_count = request.form['attendees_count']
         max_capacity = request.form['max_capacity']
         description = request.form['description']

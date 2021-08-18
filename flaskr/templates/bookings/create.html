@@ -8,8 +8,8 @@
   <form method="post">
     <label for="title">Title</label>
     <input name="title" id="title" value="{{ request.form['title'] }}" required>
-    <label for="date_booking">Date of booking</label>
-    <input name="date_booking" id="date_booking" value="{{ request.form['date_booking'] }}" required>
+    <label for="date_booking">Date of booking:</label>
+    <input type="date" name="date_booking" id="date_booking" value="{{ request.form['date_booking'] }}" required> 
     <label for="attendees_count">Attendees</label>
     <input name="attendees_count" id="attendees_count" value="{{ request.form['attendees_count'] }}" required>
     <label for="max_capacity">Maximum capacity</label>
