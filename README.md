@@ -16,3 +16,10 @@ New points to build on:
 - Both type of users require authentication to access the booking system.
 - The booking system will notify the timeslot **creator** (ie. an admin user) when a timeslot was booked.
 - Allow admin users to add properties to the timeslots created.
+
+
+How to run: 
+1. Need to set environment variable for app name "export FLASK_APP=flaskr"
+2. (optional) Set environment variable for environment type "export FLASK_ENV=development"
+3. Execute flask dev environemnt with "flask run"
+
