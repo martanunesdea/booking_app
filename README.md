@@ -1,4 +1,4 @@
-# booking_app
+# Booking app
 This repository was designed to create a booking system, stored on a database server. The end goal is to connect this system with a front-end web application for ease of use of the booking system.
 
 The user requirements for this booking system may change over time, but the scope of this project will include:
